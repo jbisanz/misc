@@ -58,7 +58,7 @@ bowtie2-build $REFERENCE index/$REFERENCE.idx
 for curr_samp in decomp_reads/*.fastq
 do
 
-	SAMPLEID=$(echo $curr_samp | sed 's/\.fna//' | sed 's/decomp_reads\///')
+	SAMPLEID=$(echo $curr_samp | sed 's/\.fastq//' | sed 's/decomp_reads\///')
 
   	echo "$(date)	Aligning $SAMPLEID"
                 INDEX="index/$REFERENCE.idx"
