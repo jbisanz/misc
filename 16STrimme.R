@@ -59,7 +59,7 @@ if(opts$SeqStrategy=="in"){
   OLSeq<-DNAStringSet(
     paste0(
       as.character(subseq(R1@sread, start = 1, width=(align@pattern@range@start+align@pattern@range@width-1))),
-      as.character(subseq(reverseComplement(R2@sread), start = align@subject@range@width, end=nchar(R2@sread)))
+      as.character(subseq(reverseComplement(R2@sread), start = align@subject@range@width+1, end=nchar(R2@sread)))
         )
   )
 } else {
@@ -73,7 +73,7 @@ if(opts$SeqStrategy=="in"){
 
 if(opts$IDTaxa){
   message("Assigning taxonomy using ", basename(opts$TaxDBGenus))
-  message("This may take some time and can be bypassed with --IDtaxa==FALSE")
+  message("This may take some time and can be bypassed with --IDTaxa==FALSE")
   tax<-assignTaxonomy(as.character(OLSeq), refFasta=opts$TaxDBGenus)
   tax<-addSpecies(tax, refFasta=opts$TaxDBSpecies, allowMultiple = TRUE, tryRC=TRUE)
   names(OLSeq)<-paste0(opts$Sample, " Taxonomy=",paste(tax[1,], collapse=","))
